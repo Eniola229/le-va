@@ -36,7 +36,8 @@ class CourseController extends Controller
 
         $validated['slug']       = Str::slug($validated['title']);
         $validated['created_by'] = auth()->id();
-        $validated['status']     = $request->action === 'publish' ? 'published' : 'draft';
+        // FIXED: changed 'action' to 'intent'
+        $validated['status']     = $request->intent === 'publish' ? 'published' : 'draft';
 
         if ($request->hasFile('cover_image')) {
             $upload = $this->cloudinary->uploadImage($request->file('cover_image'), 'lev-av/courses');
@@ -57,6 +58,7 @@ class CourseController extends Controller
 
     public function update(Request $request, Course $course)
     {
+        
         $validated = $request->validate([
             'title'               => 'required|string|max:200',
             'description'         => 'required|string',
@@ -66,7 +68,8 @@ class CourseController extends Controller
             'cover_image'         => 'nullable|image|max:5120',
         ]);
 
-        $validated['status'] = $request->action === 'publish' ? 'published' : $validated['status'];
+        // FIXED: changed 'action' to 'intent'
+        $validated['status'] = $request->intent === 'publish' ? 'published' : $validated['status'];
 
         if ($request->hasFile('cover_image')) {
             $upload = $this->cloudinary->uploadImage($request->file('cover_image'), 'lev-av/courses');
@@ -85,5 +88,3 @@ class CourseController extends Controller
         return redirect()->route('admin.courses.index')->with('success', 'Course deleted.');
     }
 }
-
-

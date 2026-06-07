@@ -19,8 +19,8 @@ class ResourceController extends Controller
         ]);
 
         foreach ($request->file('resource_files', []) as $file) {
-            $upload = $this->cloudinary->uploadFile($file, 'lev-av/resources');
-
+            $upload = $this->cloudinary->uploadDocument($file, 'lev-av/resources');
+            
             Resource::create([
                 'lesson_id'   => $lesson->id,
                 'course_id'   => $lesson->course_id,

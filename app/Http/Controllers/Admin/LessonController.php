@@ -35,7 +35,7 @@ class LessonController extends Controller
             'order'            => 'required|integer|min:1',
             'duration_minutes' => 'nullable|integer|min:1',
             'is_preview'       => 'boolean',
-            'video'            => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm|max:2097152',
+            'video' => 'nullable|file|mimetypes:video/mp4,video/quicktime,video/webm|max:102400',
         ]);
 
         $validated['course_id']  = $course->id;
@@ -86,8 +86,8 @@ class LessonController extends Controller
 
         $lesson->update($validated);
 
-        return back()->with('success', 'Lesson updated.');
-    }
+        return redirect()->route('admin.courses.edit', $lesson->course)
+                 ->with('success', 'Lesson updated.');    }
 
     public function destroy(Lesson $lesson)
     {

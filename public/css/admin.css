@@ -555,3 +555,66 @@ select.form-control { appearance: none; background-image: url("data:image/svg+xm
   .dashboard-grid { grid-template-columns: 1fr; }
   .topbar { padding: 0 16px; }
 }
+
+
+/* ── Sidebar close button (mobile only) ─────────────────────── */
+.sidebar-close {
+  display: none;              /* hidden on desktop */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  padding: 6px;
+  align-self: flex-end;
+  margin: 12px 12px 0 0;
+  transition: color var(--transition);
+  flex-shrink: 0;
+}
+.sidebar-close:hover { color: rgba(255,255,255,0.9); }
+
+/* Student sidebar close is on light bg — different colour */
+.student-sidebar .sidebar-close {
+  color: var(--text-hint);
+}
+.student-sidebar .sidebar-close:hover { color: var(--text-primary); }
+
+/* ── Sidebar backdrop (mobile overlay) ──────────────────────── */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(61,43,31,0.45);
+  z-index: 99;                /* behind sidebar (z:100) */
+  backdrop-filter: blur(2px);
+}
+.sidebar-backdrop.open { display: block; }
+
+/* ── Mobile overrides ────────────────────────────────────────── */
+@media (max-width: 900px) {
+
+  /* Show the close button on mobile */
+  .sidebar-close { display: flex; }
+
+  /* Admin sidebar — slides in from left */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    /* Also make sidebar flex-col so close btn sits at top */
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  /* Student sidebar — same */
+  .student-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .student-sidebar.open { transform: translateX(0); }
+
+  /* sidebar-nav takes remaining space */
+  .sidebar .sidebar-nav,
+  .student-sidebar .sidebar-nav { flex: 1; }
+}

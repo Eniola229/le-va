@@ -28,9 +28,13 @@
 <section class="section" style="background:var(--warm-white);">
   <div class="container">
     <div class="about-grid">
-      <div class="about-image">
-        <div class="about-image-placeholder">LEV AV</div>
-      </div>
+    <div class="about-image">
+      <img
+        src="https://i.pinimg.com/736x/8b/84/5e/8b845e3bac41375b46e797910a5f1920.jpg"
+        alt="Lev Av — Come to the Heart of God"
+        style="width:100%;height:100%;object-fit:cover;object-position:center top;"
+      >
+    </div>
       <div class="about-content">
         <div class="section-label">What is Lev Av</div>
         <h2 class="section-title">The Heart of the Father</h2>
